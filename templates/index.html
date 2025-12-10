@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Simple Calculator</title>
+  <style>
+    body { font-family: sans-serif; margin: 40px; }
+    .container { max-width: 400px; margin: 0 auto; }
+    input, select, button { width: 100%; padding: 6px; margin: 4px 0; }
+    .result { margin-top: 10px; font-weight: bold; }
+    .error { margin-top: 10px; color: #b00020; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Simple Calculator</h1>
+
+    <form method="post">
+      <label>Число A</label>
+      <input type="text" name="a" value="{{ a }}">
+
+      <label>Операция</label>
+      <select name="op">
+        <option value="add" {% if op == "add" %}selected{% endif %}>Сложение (+)</option>
+        <option value="sub" {% if op == "sub" %}selected{% endif %}>Вычитание (-)</option>
+        <option value="mul" {% if op == "mul" %}selected{% endif %}>Умножение (*)</option>
+        <option value="div" {% if op == "div" %}selected{% endif %}>Деление (/)</option>
+      </select>
+
+      <label>Число B</label>
+      <input type="text" name="b" value="{{ b }}">
+
+      <button type="submit">Посчитать</button>
+    </form>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if result is not None and not error %}
+      <div class="result">Результат: {{ result }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>
